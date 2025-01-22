@@ -1,5 +1,6 @@
 package com.example.timer;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -20,6 +21,11 @@ public class Timer {
         return this.formatedTime;
     }
 
+    public void onStartPause(ActionEvent event){
+        System.out.println("Oi");
+    }
 
 
+    public void onStop(ActionEvent event) {
+    }
 }

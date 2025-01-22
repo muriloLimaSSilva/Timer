@@ -25,20 +25,6 @@ public class TimerApplication extends Application {
         stage.show();
     }
 
-    // Método para Iniciar/Pausar o cronômetro
-    @FXML
-    public void onStartPauseButtonClicked() {
-        System.out.println("Iniciou ou Pausou");
-
-    }
-
-    // Método para Parar o cronômetro
-    @FXML
-    public void onStopButtonClicked() {
-        System.out.println("Parou");
-
-    }
-
     public static void main(String[] args) {
         launch();
     }

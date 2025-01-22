@@ -19,4 +19,12 @@ public class Timer {
 
         return this.formatedTime;
     }
+
+    public void InitializePause(){
+        System.out.println("Iniciou");
+    }
+
+    public void Stop(){
+        System.out.println("parou");
+    }
 }

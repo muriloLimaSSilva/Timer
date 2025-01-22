@@ -4,51 +4,47 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class Timer {
-    private String formatedTime;
-    private int seconds;
-    private int minutes;
-    private int hours;
+import java.time.Duration;
+import java.time.LocalTime;
 
+public class Timer {
+
+    private Duration duration;  // Para acumular o tempo
     @FXML
     protected Label labelTime;
 
-    public String formatTime(int seconds, int minutes, int hours){
-        this.seconds = seconds;
-        this.minutes = minutes;
-        this.hours = hours;
-
-        // Atualiza a variável formatada
-        this.formatedTime = String.format("%02d:%02d:%02d", this.hours, this.minutes, this.seconds);
-
-        return this.formatedTime;
+    public Timer() {
+        // Inicializa a duração com zero segundos
+        duration = Duration.ZERO;
     }
 
-    public void IncrementTime(){
-        // Incrementa o tempo
-        this.seconds++;
-        if (this.seconds >= 60){
-            this.seconds = 0;
-            this.minutes++;
-            if (this.minutes >= 60){
-                this.minutes = 0;
-                this.hours++;
-            }
-        }
+    // Método para formatar o tempo no formato HH:mm:ss
+    public String formatTime(LocalTime time) {
+        return time.format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss"));
+    }
 
-        // Formata o tempo após o incremento
-        String currentTime = formatTime(this.seconds, this.minutes, this.hours);
+    // Incrementa o tempo
+    public void IncrementTime() {
 
-        System.out.println(currentTime); // Para ver o tempo no console
+        // Incrementa 1 segundo
+        duration = duration.plusSeconds(1);
+
+        // Converte a duração acumulada para LocalTime
+        LocalTime time = LocalTime.ofSecondOfDay(duration.getSeconds());
+
+        // Formata o tempo e atualiza o Label
+        String currentTime = formatTime(time);
+        System.out.println(currentTime);  // Para ver o tempo no console
         labelTime.setText(currentTime);
     }
 
-    public void onStartPause(ActionEvent event){
-        // Inicia o incremento do tempo
+    // Método acionado para iniciar ou pausar o incremento do tempo
+    public void onStartPause(ActionEvent event) {
         IncrementTime();
     }
 
-    public void onStop(ActionEvent event) {
 
+    public void onStop(ActionEvent event) {
+        // Aqui você pode adicionar lógica para parar ou resetar o timer
     }
 }
